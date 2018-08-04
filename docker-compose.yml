@@ -1,0 +1,17 @@
+# docker-compose.yml for domoticz
+domoticz:
+  build: .
+  hostname: domoticz
+  container_name: domoticz
+  environment:
+    - VIRTUAL_HOST=domoticz.local,domoticz.mydomain.org
+    - LETSENCRYPT_HOST=domoticz.mydomain.org
+    - LETSENCRYPT_EMAIL=nospam@mail.com
+  ports:
+    - 8090:8080
+  devices:
+    - /dev/ttyUSB0:/dev/ttyUSB0
+  volumes:
+    - /etc/localtime:/etc/localtime:ro
+    - /path/to/domoticz.db:/root/domoticz/domoticz.db:rw
+  restart: always
